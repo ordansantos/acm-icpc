@@ -53,6 +53,7 @@ vector <Point> convexHull (vector <Point> &points){
         while (k >= t && cross(hull[k-2], hull[k-1], points[i]) + eps > 0) k--;
         hull[k++] = points[i];
     }
+	k--;
     hull.resize(k);
     return hull;
 }
@@ -115,9 +116,12 @@ struct Line{
 };
 
 bool pointInSegment(pair<Point, Point> s, Point p){
-    T xa = min (s.first.x, s.second.x), xb = max(s.first.x, s.second.x);
-    T ya = min (s.first.y, s.second.y), yb = max(s.first.y, s.second.y);
-    return p.x + eps > xa && p.x - eps < xb && p.y + eps > ya && p.y - eps < yb;
+	if (doubleEquals (cross(s.first, s.second, p), 0)){
+    	T xa = min (s.first.x, s.second.x), xb = max(s.first.x, s.second.x);
+    	T ya = min (s.first.y, s.second.y), yb = max(s.first.y, s.second.y);
+    	return p.x + eps > xa && p.x - eps < xb && p.y + eps > ya && p.y - eps < yb;
+	}
+	return false;
 }
 
 bool segmentInter(pair<Point, Point> A, pair<Point, Point> B){
@@ -161,5 +165,9 @@ Point rotate (Point O, Point p, double rad){
     T x = p.x * cos(rad) + p.y * -sin(rad);
     T y = p.x * sin(rad) + p.y * cos(rad);
     return Point(x, y) + O;
+}
+
+bool insideTriangle (Point A, Point B, Point C, Point p){
+    return abs(cross(p, A, B)) + abs(cross(p, B, C)) + abs(cross(p, C, A)) == abs(cross(p, A, B) + cross(p, B, C) + cross(p, C, A));
 }
 
