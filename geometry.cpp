@@ -11,8 +11,10 @@ struct Point{
     T x, y;
     Point(){}
     Point (T x, T y) : x(x), y(y){}
-    Point operator - (Point &p) { return Point (x - p.x, y - p.y); }
-    Point operator + (Point &p){ return Point (x + p.x, y + p.y); }
+    Point operator - (Point p) { return Point (x - p.x, y - p.y); }
+    Point operator + (Point p){ return Point (x + p.x, y + p.y); }
+    Point operator / (T e) { return Point (x / e, y / e); }
+    Point operator * (T e) { return Point (x * e, y * e); }
     bool operator < (const Point &p) const{ return x < p.x || (x == p.x && y < p.y); }
     bool operator == (Point p){ return doubleEquals(x, p.x) && doubleEquals(y, p.y); }
 };
@@ -169,5 +171,28 @@ Point rotate (Point O, Point p, double rad){
 
 bool insideTriangle (Point A, Point B, Point C, Point p){
     return abs(cross(p, A, B)) + abs(cross(p, B, C)) + abs(cross(p, C, A)) == abs(cross(p, A, B) + cross(p, B, C) + cross(p, C, A));
+}
+
+
+
+pair<Point, Point> centerCircle (Point a, Point b, T r){
+    Point c = (a + b) / 2;
+    double d = dist(a, b);
+    Point v = (b - a)/d;
+    swap(v.x, v.y);
+    v.x *= -1;
+    assert (d < 2 * r + eps);
+    double q;
+    if (doubleEquals(r * r, (d/2) * (d/2)))
+        q = 0;
+    else
+        q = sqrt (r * r - (d/2) * (d/2));
+    return { c + (v * q), c - (v * q)};
+}
+
+double getAxisAngle (Point c, Point p){
+    double ang = atan2((p-c).y, (p-c).x);
+    if (ang < 0) ang += 2 * acos(-1);
+    return ang;
 }
 
