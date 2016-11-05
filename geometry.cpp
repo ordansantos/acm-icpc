@@ -3,7 +3,7 @@
 using namespace std;
 
 typedef double T;
-const double eps = 1e-9;
+const double eps = 1e-10; // -9 is dangerous
 
 bool doubleEquals (T a, T b){ return abs(a - b) < eps; }
 
