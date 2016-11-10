@@ -2,6 +2,8 @@
 
 using namespace std;
 
+// IT'S A FUCKING IMPLICIT-PERSISTENT SEGMENT TREE
+
 struct node {
     int qtd;
     node *l, *r;
