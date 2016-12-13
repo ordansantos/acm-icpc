@@ -110,6 +110,7 @@ struct Line{
         return abs(A*p.x + B*p.y+C)/sqrt(A*A+B*B);
     }
 
+    // that touches a point p
     Line getPerpendicular(Point p){
         Line l(B, -A, 0);
         l.C = -l.A*p.x - l.B*p.y;
@@ -169,11 +170,10 @@ Point rotate (Point O, Point p, double rad){
     return Point(x, y) + O;
 }
 
+// check this for double!!!
 bool insideTriangle (Point A, Point B, Point C, Point p){
     return abs(cross(p, A, B)) + abs(cross(p, B, C)) + abs(cross(p, C, A)) == abs(cross(p, A, B) + cross(p, B, C) + cross(p, C, A));
 }
-
-
 
 pair<Point, Point> centerCircle (Point a, Point b, T r){
     Point c = (a + b) / 2;
@@ -195,4 +195,79 @@ double getAxisAngle (Point c, Point p){
     if (ang < 0) ang += 2 * acos(-1);
     return ang;
 }
+
+
+
+struct Circle{
+    Point p;
+    T r;
+    Circle(Point p, T r) : p(p), r(r){}
+    bool touch(Circle other){
+        double d = dist(p, other.p);
+        return d < r + other.r + eps;
+    }
+
+    // a inside b not implies b inside a
+    bool inside(Circle other){
+        double d = dist(p, other.p);
+        return d + r < other.r - eps;
+    }
+
+    bool cover(Point point){
+        return dist(point, p) < r + eps;
+    }
+
+    bool equal(Circle other){
+        double d = dist(p, other.p);
+        return doubleEquals(d, 0) && doubleEquals(r, other.r);
+    }
+
+};
+
+pair <Point, Point> circleIntersection(Circle c1, Circle c2){
+    assert (c1.touch(c2));
+    assert (!c1.inside(c2) && !c2.inside(c1));
+    assert (!c1.equal(c2));
+
+    T d = dist(c1.p, c2.p);
+    T a = (c1.r*c1.r-c2.r*c2.r+d*d)/(2*d);
+    T h = sqrtl (c1.r*c1.r-a*a);
+    Point u = (c2.p - c1.p)/d;
+    Point pu = Point(-u.y, u.x);
+    u = u * a;
+    pu = pu * h;
+    return {u+pu+c1.p, u-pu+c1.p};
+}
+
+int main(){
+
+    // Circle
+    assert (Circle({3, 4}, 5).inside(Circle({4, 5}, 7)));
+    assert (!Circle({0, 0}, 2).inside(Circle({1, 0}, 1)));
+    assert (Circle({0, 0}, 2).touch(Circle({1, 0}, 1)));
+    assert (Circle({0, 0}, 2).touch(Circle({2.5, 0}, 1)));
+    assert (!Circle({0, 0}, 2).touch(Circle({10, 0}, 1)));
+    assert (Circle({0, 0}, 2).equal(Circle({0, 0}, 2)));
+
+    pair<Point, Point> inter = circleIntersection(Circle({0, 0}, 2), Circle({4, 0}, 2));
+    assert(doubleEquals(inter.first.x, 2.));
+    assert(doubleEquals(inter.first.y, 0.));
+    assert(doubleEquals(inter.second.x, 2.));
+    assert(doubleEquals(inter.second.y, 0.));
+
+    inter = circleIntersection(Circle({-3.5, 7}, 3), Circle({2, 6}, 4));
+
+    assert(doubleEquals(inter.first.x, -0.99524940998024));
+    assert(doubleEquals(inter.first.y, 8.6511282451087));
+    assert(doubleEquals(inter.second.x,  -1.7367505900198));
+    assert(doubleEquals(inter.second.y, 4.5728717548913));
+    assert(Circle({0, 0}, 3).cover(Point(0, 3)));
+    assert(!Circle({0, 0}, 3).cover(Point(0, 3.001)));
+    assert(Circle({0, 0}, 3).cover(Point(0, 2)));
+    // Circle
+
+    return 0;
+}
+
+
 
