@@ -1,3 +1,4 @@
+
 struct node {
     long long value;
     node (long long value) : value(value) {}
