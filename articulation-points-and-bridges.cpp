@@ -32,7 +32,7 @@ struct APB {
                 if (num[v] <= low[u])
                     isArticulation[v] = true;
                 /*
-                if (numv[v] < low[u])
+                if (num[v] < low[u])
                     ponte!
                 */
                 low[v] = min (low[v], low[u]);

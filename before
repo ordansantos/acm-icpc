@@ -1,0 +1,53 @@
+
+
+1. Testar long double range, LDBL_MAX
+2. Testar Math_PI
+3. Testar __builtin_clz(0)
+4. scanf ("%[^\n]s", s) - lê até o \n e não o descarta, se não ler nada não sobreescreve a string
+5. gets, lê e descarta o \n e sobrescreve a string
+6. Não tem mudança? Sparse table
+7. a//b - Divisão inteira no python 3.5
+8. Entradas extremamente grande use leitura rápida
+9. wa em problema de double? adicione eps no printf
+10. wa também pode ser alocação errada
+11. declarar stdio.h primeiro em c++14, leitura é mais lento 
+12. c++14 Lf long double
+13. declarar char[] com mais espaço que o necessário por conta do '\0'
+14. Long prime for hasihng: 13278441824397LL (cuidado com Overflow)
+15. Unordered set pode remover um tle
+16. Apagar o 'begin' de um set vazio causa tle
+17. python3 é mais rápido que python2, pode remover tle
+18. http://codeforces.com/blog/entry/20553?#comment-252670
+19. Em problema de encontrar ciclo, cuidado com o caso de visitar um vértice que pertence ao ciclo e que o ciclo já foi computado, ex:
+	1-2 1-3 2-3 acha o ciclo, 1-2-3-1, e o "ciclo" 1-3
+20. Problema de geometria não passa? EPS 1e-10 + long double
+21. gerador:
+	while  [ $? -eq 0 ]; do	echo -ne .; ./gerador > in; ./A < in > out1; ./Aerrado < in > out2; diff out1 out2; done
+22.
+compile: g++ -Wall -c "%f"
+build: g++ -Wall -o "%e" "%f"
+all: g++ -Wall -c "%f" && g++ -Wall -o "%e" "%f" && "./%e" 
+23. sqrtl instead sqrt
+24. it's possible to calculate a large number in log and return to the original value with exp, i.e. combination.
+25. Dilworth’s Theorem In a finite partial order, the size of a maximum antichain is equal to the minimum
+number of chains needed to cover all elements of the partial order.
+26. A set of vertices is a vertex cover if and only if its complement is an independent set.
+27. The antichain corresponds to independent set
+28. In any bipartite graph, the number of edges in a maximum matching equals the number of vertices in a minimum vertex cover.(Kőnig's theorem)
+29. The complement of the minimum vertex cover in a bipartite graph from a poset is the maximum antichain (http://stackoverflow.com/questions/23858530/how-can-i-get-the-antichain-elements-in-spoj-divrel)
+30. Tempo apertado na dp? NÃO USE RECURSÃO
+31. Problema de query? fflush após TODO print
+32. #define MOD 1000000000 + 9 != #define MOD (1000000000 + 9)
+33. Frobenius-Coin Theorem (otherwise know as Chicken McNugget Theorem) which states that for relatively prime positive integers a and b the greatest integer that cannot be expressed as non-negative linear combinations of a and b is given explicitly as ab-a-b.
+34. Testar limite da stack
+35. Nunca coloque i como parâmetro de função
+36. Quando puder, não economize a redução de tempo na dp http://codeforces.com/contest/754/problem/C
+37. Para construir a resposta na dp recursiva, copie EXATAMENTE a dp original e vá para caminhos que dão certo de primeira e pegue o resultado que levou a esse caminho.
+	Obs.: exatamente pois a construção pode depender da passagem de parametro usado e esse parametro pode ser verificado antes de partir para a resposta.
+38. a/b*c != (a/(b*c))
+39. sscanf("10 2000", "%d %d", &age, &year);
+40. g++ -std=c++11 -Wall -O2 -lm A.cpp -o A
+41. Digitos não podem ser maiores ou iguais a base quando for fazer dp com quebra de número
+42. int ROOT = 1.514*sqrt(n)+0.5;
+43. Cuidado com for each em C++, principalmente quando é para modificação, por exemplo em mapa, USE referência " for (auto &a: v)" 
+
