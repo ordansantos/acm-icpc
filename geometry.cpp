@@ -6,6 +6,9 @@ typedef double T;
 const double eps = 1e-10; // -9 is dangerous
 
 bool doubleEquals (T a, T b){ return abs(a - b) < eps; }
+bool db_less (T a, T b){ return a < b - eps; }
+bool db_equal (T a, T b){ return abs(a - b) < eps; }
+bool db_less_equal (T a, T b){ return a < b + eps; }
 
 struct Point{
     T x, y;
