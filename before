@@ -51,3 +51,6 @@ number of chains needed to cover all elements of the partial order.
 42. int ROOT = 1.514*sqrt(n)+0.5;
 43. Cuidado com for each em C++, principalmente quando é para modificação, por exemplo em mapa, USE referência " for (auto &a: v)" 
 
+44. Testar memória dentro de função (vetor dinamico, global, do escopo)
+
+
