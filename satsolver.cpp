@@ -56,4 +56,11 @@ struct satSolver {
         return true;
     }
 
+    bool trueorfalse (int i){
+        if (component[get_value(-i)] < component[get_value(i)]) return true;
+        return false;
+    }
+
 };
+// a == b: (a || !b) && (!a || b)
+// a != b: (a || b) && (!a || !b)
