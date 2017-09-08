@@ -41,7 +41,7 @@ struct node {
         return l->query(a, (a + b)/2, i, j) + r->query((a + b)/2 + 1, b, i, j);     // -- CHANGE MERGE
     }
 
-    // VALUE?
+    // VALUE? - Já tem alguém chamado value!!!!
     void update (int a, int b, int i, int j){
         if (a > j || b < i) return;
         if (a >= i && b <= j){
@@ -50,7 +50,7 @@ struct node {
             expand(a, b);
             l->update(a, (a+b)/2, i, j);
             r->update((a + b)/2 + 1, b, i, j);
-            value = l->value + r->value;
+            value = l->value + r->value;        // CHANGE MERGE
         }
     }
 };
