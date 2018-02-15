@@ -53,4 +53,6 @@ number of chains needed to cover all elements of the partial order.
 
 44. Testar memória dentro de função (vetor dinamico, global, do escopo)
 
+45. Rotação do grid para fazer query na distância de manhattan (x - y, x + y) - quadrado (x + r, y + r), (x - r, y - r)
+
 
